@@ -8,83 +8,9 @@ include(__DIR__ . '/../config/db.php');
 
 <!-- Add Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="group.css">
 
 <style>
-.events-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  padding: 2rem;
-}
-
-.event-card {
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  padding: 1.5rem;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.event-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
-}
-
-.event-card h3 {
-  color: #2d3748;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid #e2e8f0;
-  padding-bottom: 0.5rem;
-}
-
-.event-card p {
-  color: #4a5568;
-  margin: 0.5rem 0;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.event-card .description {
-  font-style: italic;
-  color: #718096;
-  margin: 1rem 0;
-  line-height: 1.6;
-}
-
-.event-card button {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 8px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  margin: 0.5rem;
-}
-
-.edit-btn {
-  background: #4299e1;
-  color: white;
-}
-
-.edit-btn:hover {
-  background: #3182ce;
-}
-
-.delete-btn {
-  background: #f56565;
-  color: white;
-}
-
-.delete-btn:hover {
-  background: #e53e3e;
-}
-
 .openModal {
   background: #48bb78;
   color: white;
@@ -99,6 +25,20 @@ include(__DIR__ . '/../config/db.php');
 .openModal:hover {
   background: #38a169;
   transform: translateY(-2px);
+}
+
+.button-group {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.event-card {
+  position: relative;
+  padding-bottom: 60px; /* Ensure space for buttons */
 }
 </style>
 
@@ -251,12 +191,14 @@ include(__DIR__ . '/../config/db.php');
                         <p class="description"><i class="fas fa-info-circle"></i> ${escapeHtml(event.description).slice(0, 160)}...</p>
                         <p><i class="fas fa-users"></i> Max Volunteers: ${escapeHtml(event.max_volunteers)}</p>
                         
-                        <button onclick="openEditModal(${event.id}, '${escapeHtml(event.title)}', '${escapeHtml(event.event_date)}', '${escapeHtml(event.location)}', '${escapeHtml(event.description)}', ${event.max_volunteers})" class="edit-btn">
-                          <i class="fas fa-edit"></i> Edit
-                        </button>
-                        <button onclick="deleteEvent(${event.id})" class="delete-btn">
-                          <i class="fas fa-trash-alt"></i> Delete
-                        </button>
+                        <div class="button-group">
+                            <button onclick="openEditModal(${event.id}, '${escapeHtml(event.title)}', '${escapeHtml(event.event_date)}', '${escapeHtml(event.location)}', '${escapeHtml(event.description)}', ${event.max_volunteers})" class="edit-btn">
+                              <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button onclick="deleteEvent(${event.id})" class="delete-btn">
+                              <i class="fas fa-trash-alt"></i> Delete
+                            </button>
+                        </div>
                     </div>
                 `).join('')}
             </div>

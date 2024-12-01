@@ -154,9 +154,8 @@ a.openModal {
   padding: 0.5rem 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  z-index:-9;
-}
 
+}
 
 .search-wrapper:hover,
 .search-wrapper:focus-within {
